@@ -23,6 +23,11 @@ class KMeans implements Clusterer
      */
     private $initialization;
 
+     /**
+     * @var array
+     */
+    private $centronoids = [];
+
     public function __construct(int $clustersNumber, int $initialization = self::INIT_KMEANS_PLUS_PLUS)
     {
         if ($clustersNumber <= 0) {
@@ -43,8 +48,15 @@ class KMeans implements Clusterer
         $clusters = [];
         foreach ($space->cluster($this->clustersNumber, $this->initialization) as $cluster) {
             $clusters[] = $cluster->getPoints();
+            $arrayCluster = $cluster->toArray();
+            $this->centronoids[] = $arrayCluster['centroid'];
         }
 
         return $clusters;
+    }
+
+    public function centronoids(): array
+    {
+        return $this->centronoids;
     }
 }
