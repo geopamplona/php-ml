@@ -23,7 +23,7 @@ class KMeans implements Clusterer
      */
     private $initialization;
 
-     /**
+    /**
      * @var array
      */
     private $centronoids = [];
